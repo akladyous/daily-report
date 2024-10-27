@@ -5,11 +5,7 @@ if (!process.env.GITHUB_ACTIONS) {
     process.loadEnvFile();
 }
 
-const accuweatherUrl = `http://dataservice.accuweather.com/locations/v1/cities/`;
-const url = new URL(accuweatherUrl);
-console.log(url.pathname);
-
-export async function main() {
+async function sendEmail() {
     const transporter = createTransport({
         service: "gmail",
         host: process.env.SMTP_HOST,
@@ -27,5 +23,8 @@ export async function main() {
         text: "hello world",
     });
 }
+export async function main() {
+    await getWeather();
+}
 
-// await main();
+await main();
