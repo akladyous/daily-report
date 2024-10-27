@@ -1,5 +1,5 @@
 process.env.TZ = "America/New_York";
-process.loadEnvFile("/.env");
+process.loadEnvFile("./.env");
 import { createTransport } from "nodemailer";
 
 export async function main() {
