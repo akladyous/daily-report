@@ -1,6 +1,9 @@
 process.env.TZ = "America/New_York";
-process.loadEnvFile("./.env");
 import { createTransport } from "nodemailer";
+
+if (!process.env.GITHUB_ACTIONS) {
+    process.loadEnvFile();
+}
 
 export async function main() {
     const transporter = createTransport({
