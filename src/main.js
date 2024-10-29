@@ -1,11 +1,12 @@
 process.env.TZ = "America/New_York";
 import { createTransport } from "nodemailer";
+import { generateAccuWeatherDailyForecast } from "./accuweather.com/generateAccuWeatherDailyForecast.js";
 
 if (!process.env.GITHUB_ACTIONS) {
     process.loadEnvFile();
 }
 
-async function sendEmail() {
+async function sendEmail(content) {
     const transporter = createTransport({
         service: "gmail",
         host: process.env.SMTP_HOST,
@@ -20,11 +21,15 @@ async function sendEmail() {
         from: process.env.EMAIL_FROM,
         to: process.env.EMAIL_TO,
         subject: "Daily Report",
-        text: "hello world",
+        html: content,
     });
 }
+
 export async function main() {
-    await getWeather();
+    const email = await generateAccuWeatherDailyForecast();
+    if (email) {
+        sendEmail(email);
+    }
 }
 
 await main();
