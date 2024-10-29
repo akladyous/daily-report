@@ -26,9 +26,15 @@ async function sendEmail(content) {
 }
 
 export async function main() {
-    const email = await generateAccuWeatherDailyForecast();
-    if (email) {
-        sendEmail(email);
+    try {
+        const email = await generateAccuWeatherDailyForecast();
+        if (email) {
+            await sendEmail(email);
+        } else {
+            console.error("Failed to generate email content. Please check the weather data retrieval.");
+        }
+    } catch (error) {
+        console.error("An error occurred:", error);
     }
 }
 
