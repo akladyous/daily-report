@@ -4,36 +4,36 @@
 name: Daily Report
 
 on:
-  schedule:
-  - cron: "0 12 * * *"
-  workflow_dispatch:
+    schedule:
+        - cron: "0 12 * * *"
+    workflow_dispatch:
 
 env:
-  SMTP_HOST: ${{ secrets.SMTP_HOST }}
-  SMTP_PORT: ${{ secrets.SMTP_PORT }}
-  SMTP_USER: ${{ secrets.SMTP_USER }}
-  SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-  EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
-  EMAIL_TO: ${{ secrets.EMAIL_TO }}
+    SMTP_HOST: ${{ secrets.SMTP_HOST }}
+    SMTP_PORT: ${{ secrets.SMTP_PORT }}
+    SMTP_USER: ${{ secrets.SMTP_USER }}
+    SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+    EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+    EMAIL_TO: ${{ secrets.EMAIL_TO }}
+    ACCUWEATHER_API_KEY: ${{ secrets.ACCUWEATHER_API_KEY }}
 
 jobs:
-  report:
+    report:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [23.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    strategy:
-      matrix:
-        node-version: [23.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: node src/main.js
-    # - run: npm run build --if-present
-    # - run: npm test
+        steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: "npm"
+            - run: npm ci
+            - run: node src/main.js
+        # - run: npm run build --if-present
+        # - run: npm test
