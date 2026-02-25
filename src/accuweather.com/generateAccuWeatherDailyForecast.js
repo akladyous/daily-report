@@ -1,4 +1,3 @@
-import { getAccuWeatherGeocodingCoordinates } from "./getAccuWeatherGeocodingCoordinates.js";
 import { getAccuWeatherDailyForecasts } from "./getAccuWeatherDailyForecasts.js";
 import { generateForecastEmail } from "./generateForecastEmail.js";
 
@@ -11,7 +10,6 @@ export const generateAccuWeatherDailyForecast = async () => {
         zip: "33417",
     };
 
-    // const coordinates = await getAccuWeatherGeocodingCoordinates(apiKey, geoLocation);
     const coordinates = { latitude: 26.715, longitude: 26.715, locationKey: "328167" };
     if (!coordinates) {
         console.error("Failed to retrieve coordinates. Please check the location details.");
@@ -24,7 +22,7 @@ export const generateAccuWeatherDailyForecast = async () => {
         console.error("Failed to retrieve weather data.");
         return;
     }
-    console.log("Weather:\n", forecast);
+    console.log("forecast:\n", forecast);
 
     const email = generateForecastEmail(forecast);
     return email;

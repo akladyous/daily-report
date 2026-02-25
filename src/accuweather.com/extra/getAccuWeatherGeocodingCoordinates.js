@@ -42,3 +42,9 @@ export const getAccuWeatherGeocodingCoordinates = async (apiKey, geoLocation) =>
         return null;
     }
 };
+
+// Example usage:
+// const apiKey = process.env.ACCUWEATHER_API_KEY;
+// const geoLocation = { city: "New York", state: "NY", country: "US" };
+// const coordinates = await getAccuWeatherGeocodingCoordinates(apiKey, geoLocation);
+// console.log(coordinates);

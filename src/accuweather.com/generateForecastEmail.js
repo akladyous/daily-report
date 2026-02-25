@@ -20,7 +20,7 @@ export function generateForecastEmail(forecast) {
         <div style="max-width: 600px; margin: auto; background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
             <!-- Header -->
             <div style="background-color: #4a90e2; padding: 20px; text-align: center; color: white;">
-                <h2 style="margin: 0;">Weather Forecast for ${formattedDate}</h2>
+                <h2 style="margin: 0;" class="weatherHeader">Weather Forecast for ${formattedDate}</h2>
             </div>
 
             <!-- Headline Section -->
